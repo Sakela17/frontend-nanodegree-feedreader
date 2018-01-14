@@ -9,10 +9,9 @@
  * to ensure they don't run until the DOM is ready.
  */
 $(function() {
-    /* This is our first test suite - a test suite just contains
-    * a related set of tests. This suite is all about the RSS
-    * feeds definitions, the allFeeds variable in our application.
-    */
+    /* This suite is all about the RSS
+     * feeds definitions, the allFeeds variable in our application.
+     */
     describe('RSS Feeds', function() {
         /* This test makes sure that the allFeeds variable
          * has been defined and that it is not empty.
@@ -48,6 +47,8 @@ $(function() {
         });
     });
 
+    /* This suite is for testing the sliding menu functionality.
+     */
     describe('The menu', function() {
         var menuIconLink = $('.menu-icon-link');
         var bodyEl = $('body');
@@ -69,6 +70,8 @@ $(function() {
         });
     });
 
+    /* This suite is for testing asynchronous calls that load RSS feeds.
+     */
     describe('Initial Entries', function() {
         beforeEach(function(done) {
             loadFeed(0, done);
@@ -79,9 +82,11 @@ $(function() {
          */
         it('are loaded with at least a single .entry element', function() {
             expect($('.feed').has('.entry').length).not.toEqual(0);
-        })
+        });
     });
 
+    /* This suite is for testing asynchronous calls that load RSS feeds.
+     */
     describe('New Feed Selection', function() {
         beforeEach(function(done) {
             this.feedHTML = $('.feed').html();
@@ -94,7 +99,6 @@ $(function() {
          */
         it('loads new content', function() {
             expect($('.feed').html()).not.toEqual(this.feedHTML);
-        })
-    })
-
+        });
+    });
 }());
