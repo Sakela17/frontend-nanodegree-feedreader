@@ -26,11 +26,11 @@ $(function() {
          * and that the URL is not empty.
          */
         it('to have URL', function() {
-            allFeeds.forEach(function(obj) {
-                expect(obj.url).toBeDefined();
-                expect(obj.url).toEqual(jasmine.any(String));  // should be a string
-                expect(obj.url.length).not.toBe(0);  // should not be an empty string
-                expect(obj.url.indexOf(' ')).toEqual(-1);  // should not have empty spaces
+            allFeeds.forEach(function(feed) {
+                expect(feed.url).toBeDefined();
+                expect(feed.url).toEqual(jasmine.any(String));  // should be a string
+                expect(feed.url.length).not.toBe(0);  // should not be an empty string
+                expect(feed.url.indexOf(' ')).toEqual(-1);  // should not have empty spaces
             });
         });
 
@@ -39,10 +39,10 @@ $(function() {
          * and that the name is not empty.
          */
         it('to have name', function() {
-            allFeeds.forEach(function(obj) {
-                expect(obj.name).toBeDefined();
-                expect(obj.name).toEqual(jasmine.any(String));
-                expect(obj.name).not.toBe("");
+            allFeeds.forEach(function(feed) {
+                expect(feed.name).toBeDefined();
+                expect(feed.name).toEqual(jasmine.any(String));
+                expect(feed.name).not.toBe("");
             });
         });
     });
@@ -88,17 +88,22 @@ $(function() {
     /* This suite is for testing asynchronous calls that load RSS feeds.
      */
     describe('New Feed Selection', function() {
+        var currFeed, newFeed;
         beforeEach(function(done) {
-            this.feedHTML = $('.feed').html();
-
-            loadFeed(1, done);
+            loadFeed(0, function() {
+                currFeed = $('.feed').html();
+                loadFeed(1, function() {
+                    newFeed = $('.feed').html();
+                    done();
+                })
+            });
         });
 
         /* This test ensures when a new feed is loaded
          * by the loadFeed function that the content actually changes.
          */
         it('loads new content', function() {
-            expect($('.feed').html()).not.toEqual(this.feedHTML);
+            expect(newFeed).not.toEqual(currFeed);
         });
     });
 }());
