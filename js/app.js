@@ -24,7 +24,7 @@ var allFeeds = [
 ];
 
 /* This function starts up our application. The Google Feed
- * Reader API is loaded asynchonously and will then call this
+ * Reader API is loaded asynchronously and will then call this
  * function when the API is loaded.
  */
 function init() {
@@ -50,7 +50,6 @@ function init() {
        data: JSON.stringify({url: feedUrl}),
        contentType:"application/json",
        success: function (result, status){
-
                  var container = $('.feed'),
                      title = $('.header-title'),
                      entries = result.feed.entries,
@@ -91,6 +90,7 @@ google.setOnLoadCallback(init);
 /* All of this functionality is heavily reliant upon the DOM, so we
  * place our code in the $() function to ensure it doesn't execute
  * until the DOM is ready.
+ * This is jQuery shorthand.
  */
 $(function() {
     var container = $('.feed'),
