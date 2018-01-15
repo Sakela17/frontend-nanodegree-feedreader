@@ -95,7 +95,7 @@ $(function() {
                 loadFeed(1, function() {
                     newFeed = $('.feed').html();
                     done();
-                })
+                });
             });
         });
 
